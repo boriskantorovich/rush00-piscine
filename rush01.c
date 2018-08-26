@@ -3,91 +3,51 @@
 /*                                                        :::      ::::::::   */
 /*   rush01.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dfisher <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: ehorker <ehorker@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2018/08/26 21:22:34 by dfisher           #+#    #+#             */
-/*   Updated: 2018/08/26 21:22:37 by dfisher          ###   ########.fr       */
+/*   Created: 2018/08/26 22:09:03 by ehorker           #+#    #+#             */
+/*   Updated: 2018/08/26 22:25:38 by ehorker          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-void	ft_putchar (char c);
+void	ft_putchar(char c);
 
-int		get_row_index(int x, int y, int i)
+void	conc(int s, int a, int b, int k)
 {
-	int row;
-
-	row = (int)i / x;
-	if (row == 0)
+	if ((s == b || s == 1))
 	{
-		return (0);
+		if ((k == 1 && s == b) || (k == a && s == 1))
+			if ((b != 1 && a != 1) || (s != b))
+				ft_putchar('\\');
+		if (k != 1 && k != a)
+			ft_putchar('*');
 	}
-	else if (row == y - 1)
-	{
-		return (2);
-	}
+	else if ((k == 1 || k == a) && (s < b && s != 1))
+		ft_putchar('*');
 	else
-	{
-		return (1);
-	}
+		ft_putchar(' ');
 }
 
-int		get_char_index(int x, int i)
+void	rush(int a, int b)
 {
-	int pos_in_row;
+	int s;
+	int k;
 
-	pos_in_row = i % x;
-	if (pos_in_row == 0)
+	s = b;
+	ft_putchar('/');
+	while (s > 0)
 	{
-		return (0);
-	}
-	else if (pos_in_row == x - 1)
-	{
-		return (2);
-	}
-	else
-	{
-		return (1);
-	}
-}
-
-char	base(int a, int b)
-{
-	char base_matrix[3][3];
-
-	base_matrix[0][0] = '/';
-	base_matrix[0][1] = '*';
-	base_matrix[0][2] = '\\';
-	base_matrix[1][0] = '*';
-	base_matrix[1][1] = ' ';
-	base_matrix[1][2] = '*';
-	base_matrix[2][0] = '\\';
-	base_matrix[2][1] = '*';
-	base_matrix[2][2] = '/';
-	return (base_matrix[a][b]);
-}
-
-void	rush(int x, int y)
-{
-	int i;
-	int row_index;
-	int char_index;
-	int symbol;
-
-	if (x <= 0 || y <= 0)
-		return ;
-	else
-	{
-		i = 0;
-		while (i < x * y)
+		k = a;
+		while (k > 0)
 		{
-			row_index = get_row_index(x, y, i);
-			char_index = get_char_index(x, i);
-			symbol = base(row_index, char_index);
-			if (char_index == 0 && i != 0)
-				ft_putchar('\n');
-			ft_putchar(symbol);
-			i++;
+			conc(s, a, b, k);
+			k--;
 		}
+		if (s == 1 && a != 1 && b != 1)
+			ft_putchar('/');
+		if (b == 1 && s == 1 && a != 1)
+			ft_putchar('\\');
 		ft_putchar('\n');
+		s--;
 	}
 }
