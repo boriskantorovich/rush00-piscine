@@ -42,15 +42,15 @@ char	base(int a, int b)
 {
 	char base_matrix[3][3];
 
-	base_matrix[0][0] = '/';
-	base_matrix[0][1] = '*';
-	base_matrix[0][2] = '\\';
-	base_matrix[1][0] = '*';
+	base_matrix[0][0] = 'A';
+	base_matrix[0][1] = 'B';
+	base_matrix[0][2] = 'C';
+	base_matrix[1][0] = 'B';
 	base_matrix[1][1] = ' ';
-	base_matrix[1][2] = '*';
-	base_matrix[2][0] = '\\';
-	base_matrix[2][1] = '*';
-	base_matrix[2][2] = '/';
+	base_matrix[1][2] = 'B';
+	base_matrix[2][0] = 'A';
+	base_matrix[2][1] = 'B';
+	base_matrix[2][2] = 'C';
 	return (base_matrix[a][b]);
 }
 
